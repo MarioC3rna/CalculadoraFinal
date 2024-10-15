@@ -1,17 +1,63 @@
 package umg.dem1;
 
+import umg.dem1.Metodos.AreaBajoCurva.UserAreaBajoCurva;
+import umg.dem1.Metodos.Definidas.UserDefinidas;
+import umg.dem1.Metodos.Impropias.UserImpropias;
+import umg.dem1.Metodos.IntegralporPartes.UserPorPartes;
+import umg.dem1.Metodos.Sustitucion.UserSustitucion;
+import umg.dem1.Metodos.Trigonometricas.UserTrigonometrica;
+import umg.dem1.Metodos.VolumenSolido.UserVolumenSolido;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+
+    public static void main(String[] args) {
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        System.out.println("Seleccione el método que desea usar para resolver la integrales :");
+        System.out.println("1. Metodos de Area bajo la curva");
+        System.out.println("2. Metodo de Integrales Definidas");
+        System.out.println("3. Metodo de Integrales Impropias");
+        System.out.println("4. Metodo de Integrales por Partes");
+        System.out.println("5. Metodo de Sustitución");
+        System.out.println("6. Metodo de Trigonometricas");
+        System.out.println("7. Metodo de Volumen de Solidos");
+
+        int opcion = scanner.nextInt();
+
+        switch (opcion) {
+            case 1:
+                UserAreaBajoCurva userAreaBajoCurva = new UserAreaBajoCurva();
+                break;
+            case 2:
+                UserDefinidas userDefinidas = new UserDefinidas();
+                break;
+            case 3:
+                UserImpropias userImpropias = new UserImpropias();
+                break;
+            case 4:
+                UserPorPartes userPorPartes = new UserPorPartes();
+                break;
+            case 5:
+                UserSustitucion userSustitucion = new UserSustitucion();
+                break;
+            case 6:
+                UserTrigonometrica userTrigonometrica = new UserTrigonometrica();
+                break;
+            case 7:
+                UserVolumenSolido userVolumenSolido = new UserVolumenSolido();
+                break;
+            default:
+                System.out.println("Opción no válida");
+                break;
         }
     }
+
+
+
+
+
+
+
 }
