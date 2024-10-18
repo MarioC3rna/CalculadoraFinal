@@ -1,8 +1,11 @@
 package umg.dem1;
 
 import umg.dem1.Metodos.AreaBajoCurva.UserAreaBajoCurva;
+import umg.dem1.Metodos.CentroidesyCentroides.LogicaCentroides;
 import umg.dem1.Metodos.Definidas.UserDefinidas;
 import umg.dem1.Metodos.Impropias.UserImpropias;
+import umg.dem1.Metodos.IntegralDerivadasParciales.LogicaDerivadasParciales;
+import umg.dem1.Metodos.IntegralValorMedio.LogicaValorMedio;
 import umg.dem1.Metodos.IntegralporPartes.UserPorPartes;
 import umg.dem1.Metodos.Sustitucion.UserSustitucion;
 import umg.dem1.Metodos.Trigonometricas.UserTrigonometrica;
@@ -23,6 +26,9 @@ public class Main {
         System.out.println("5. Metodo de Sustitución");
         System.out.println("6. Metodo de Trigonometricas");
         System.out.println("7. Metodo de Volumen de Solidos");
+        System.out.print("8. Metodo de Centroides");
+        System.out.println("9. Metodo de Derivadas Parciales");
+        System.out.print("10. Metodo de Integral de Valor Medio");
 
         int opcion = scanner.nextInt();
 
@@ -47,6 +53,15 @@ public class Main {
                 break;
             case 7:
                 UserVolumenSolido userVolumenSolido = new UserVolumenSolido();
+                break;
+            case 8:
+               LogicaCentroides userCentroides = new LogicaCentroides();
+                break;
+            case 9:
+                LogicaDerivadasParciales userDerivadasParciales = new LogicaDerivadasParciales();
+                break;
+            case 10:
+                LogicaValorMedio userValorMedio = new LogicaValorMedio();
                 break;
             default:
                 System.out.println("Opción no válida");
