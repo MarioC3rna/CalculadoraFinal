@@ -170,6 +170,8 @@ public class Discos {
                     } else {
                         throw new RuntimeException("Unexpected: " + (char) ch);
                     }
+                    if (eat('^')) {
+                        x = Math.pow(x, parseFactor());}
 
                     return x;
                 }

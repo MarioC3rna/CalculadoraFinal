@@ -7,11 +7,12 @@ import java.util.Scanner;
 public class LogicaDerivadasParciales {
 
 
-    public static void Parciales() {
-        Scanner scanner = new Scanner(System.in);
+    public static void Parciales(Scanner scanner) {
+
         ExprEvaluator eval = new ExprEvaluator();
 
         try {
+            scanner.nextLine();
             System.out.print("Ingresa la funcion en términos de X y Y: ");
             String expresion = scanner.nextLine();
 

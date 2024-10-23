@@ -52,9 +52,10 @@ public class LogicaValorMedio {
         }
     }
 
-    public static void ValorMedio() {
-        Scanner scanner = new Scanner(System.in);
+    public static void ValorMedio(Scanner scanner) {
+
         try {
+            scanner.nextLine();
             System.out.print("Ingresa la función en términos de x: ");
             String funcionInput = scanner.nextLine();
 

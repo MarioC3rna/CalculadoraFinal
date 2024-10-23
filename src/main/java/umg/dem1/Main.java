@@ -26,9 +26,9 @@ public class Main {
         System.out.println("5. Metodo de Sustitución");
         System.out.println("6. Metodo de Trigonometricas");
         System.out.println("7. Metodo de Volumen de Solidos");
-        System.out.print("8. Metodo de Centroides");
+        System.out.print("8. Metodo de Centroides\n");
         System.out.println("9. Metodo de Derivadas Parciales");
-        System.out.print("10. Metodo de Integral de Valor Medio");
+        System.out.print("10. Metodo de Integral de Valor Medio\n");
 
         int opcion = scanner.nextInt();
 
@@ -55,24 +55,19 @@ public class Main {
                 UserVolumenSolido userVolumenSolido = new UserVolumenSolido();
                 break;
             case 8:
-               LogicaCentroides userCentroides = new LogicaCentroides();
+               LogicaCentroides.Centroides(scanner);
                 break;
             case 9:
-                LogicaDerivadasParciales userDerivadasParciales = new LogicaDerivadasParciales();
+                LogicaDerivadasParciales.Parciales(scanner);
                 break;
             case 10:
-                LogicaValorMedio userValorMedio = new LogicaValorMedio();
+                LogicaValorMedio.ValorMedio(scanner);
                 break;
+
             default:
                 System.out.println("Opción no válida");
                 break;
         }
     }
-
-
-
-
-
-
 
 }

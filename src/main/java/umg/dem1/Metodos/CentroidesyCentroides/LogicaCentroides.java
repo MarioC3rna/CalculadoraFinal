@@ -17,7 +17,7 @@ public class LogicaCentroides {
                     .setVariable("x", x);
             return expression.evaluate();
         } catch (Exception e) {
-            System.err.println("Error al evaluar la funcion: " + e.getMessage());
+            System.err.println("Error al evaluar la función: " + e.getMessage());
             return Double.NaN;
         }
     }
@@ -32,25 +32,21 @@ public class LogicaCentroides {
         }
     }
 
-    public static void Centroides() {
-        Scanner scanner = new Scanner(System.in);
+    public static void Centroides(Scanner scanner) {
         try {
+            scanner.nextLine();
             System.out.print("Ingresa la función en términos de x: ");
             String funcionInput = scanner.nextLine();
 
             System.out.print("Ingresa el límite inferior (a): ");
             double a = scanner.nextDouble();
+            scanner.nextLine();
+
             System.out.print("Ingresa el límite superior (b): ");
             double b = scanner.nextDouble();
+            scanner.nextLine();
 
-            UnivariateFunction funcion = x -> {
-                try {
-                    return evaluarFuncion(funcionInput, x);
-                } catch (Exception e) {
-                    System.out.println("Error al evaluar la función: " + e.getMessage());
-                    return 0;
-                }
-            };
+            UnivariateFunction funcion = x -> evaluarFuncion(funcionInput, x);
 
             double area = evaluarIntegral(funcion, a, b);
 
@@ -58,15 +54,14 @@ public class LogicaCentroides {
                 double xBar = evaluarIntegral(x -> x * funcion.value(x), a, b) / area;
                 double yBar = evaluarIntegral(funcion, a, b) / area;
 
-                System.out.println("Área (A): " + area);
-                System.out.println("Centro de masa (x̄, ȳ): (" + xBar + ", " + yBar + ")");
+
+                System.out.printf("Área (A): %.2f%n", area);
+                System.out.printf("Centro de masa (x̄, ȳ): (%.2f, %.2f)%n", xBar, yBar);
             } else {
                 System.out.println("El área es 0 o no se pudo calcular correctamente.");
             }
         } catch (Exception e) {
             System.err.println("Error en la entrada de datos o ejecución: " + e.getMessage());
-        } finally {
-            scanner.close();
         }
     }
 }
