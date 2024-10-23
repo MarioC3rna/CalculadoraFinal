@@ -2,6 +2,8 @@ package umg.dem1.Metodos.VolumenSolido;
 
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.integration.SimpsonIntegrator;
+import umg.dem1.Metodos.utilidades.GraficadorArandelas;
+import umg.dem1.Metodos.utilidades.GraficadorFunciones;
 
 import java.util.Scanner;
 
@@ -37,6 +39,8 @@ public class Arandelas {
 
             System.out.println("\n\nEl volumen del sólido es: "+volumenRedondeado+" unidades cubicas.");
 
+            GraficadorArandelas.graficarFunciones(inputFuncionF, inputFuncionG, limInferior, limSuperior, eje, this);
+
             sc.close();
         }else if(respuestaEje.equals("2")){ //EJE Y
             eje = 'y';
@@ -58,6 +62,8 @@ public class Arandelas {
             double volumenRedondeado = Math.round(volumen * 1000.0) / 1000.0;
 
             System.out.println("\n\nEl volumen del sólido es: "+volumenRedondeado+" unidades cubicas.");
+
+            GraficadorArandelas.graficarFunciones(inputFuncionF, inputFuncionG, limInferior, limSuperior, eje, this);
 
             sc.close();
         }else{
@@ -99,7 +105,7 @@ public class Arandelas {
     }
 
 
-    private double evalSimpleExpression(String expresion, char eje) {
+    public double evalSimpleExpression(String expresion, char eje) {
         try {
             return new Object() {
                 int pos = -1, ch;
@@ -170,6 +176,8 @@ public class Arandelas {
                     }
                     if (eat('^')) {
                         x = Math.pow(x, parseFactor());}
+
+
 
                     return x;
                 }

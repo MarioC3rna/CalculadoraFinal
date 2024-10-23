@@ -4,6 +4,7 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.integration.SimpsonIntegrator;
+import umg.dem1.Metodos.utilidades.GraficadorFunciones;
 
 import java.util.Scanner;
 
@@ -69,6 +70,9 @@ public class LogicaValorMedio {
             double resultado = calcularIntegralPromedio(funcion, a, b);
 
             System.out.println("El valor promedio de la integral de la función '" + funcionInput + "' en el intervalo [" + a + ", " + b + "] es: " + resultado);
+
+            GraficadorFunciones.mostrarGrafica(funcionInput, funcion, a, b);
+
         } catch (Exception e) {
             System.err.println("Error en la entrada de datos o ejecución: " + e.getMessage());
         } finally {

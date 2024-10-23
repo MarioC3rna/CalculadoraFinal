@@ -2,6 +2,7 @@ package umg.dem1.Metodos.VolumenSolido;
 
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.integration.SimpsonIntegrator;
+import umg.dem1.Metodos.utilidades.GraficadorDiscos;
 
 import java.util.Scanner;
 
@@ -39,6 +40,9 @@ public class Discos {
 
             System.out.println("\n\nEl volumen del sólido es: "+volumenRedondeado+" unidades cubicas.");
 
+            GraficadorDiscos graficador = new GraficadorDiscos(inputFuncionF, inputFuncionG, limInferior, limSuperior, eje);
+            graficador.mostrarGrafica();
+
             sc.close();
         }else if(respuestaEje.equals("2")){ //EJE Y
             eje = 'y';
@@ -60,6 +64,8 @@ public class Discos {
             double volumenRedondeado = Math.round(volumen * 1000.0) / 1000.0;
 
             System.out.println("\n\nEl volumen del sólido es: "+volumenRedondeado+" unidades cubicas.");
+            GraficadorDiscos graficador = new GraficadorDiscos(inputFuncionF, inputFuncionG, limInferior, limSuperior, eje);
+            graficador.mostrarGrafica();
 
             sc.close();
         }else{
@@ -101,7 +107,7 @@ public class Discos {
     }
 
 
-    private double evalSimpleExpression(String expresion, char eje) {
+    public double evalSimpleExpression(String expresion, char eje) {
         try {
             return new Object() {
                 int pos = -1, ch;

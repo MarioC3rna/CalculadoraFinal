@@ -11,8 +11,7 @@ import umg.dem1.Metodos.Sustitucion.UserSustitucion;
 import umg.dem1.Metodos.Trigonometricas.UserTrigonometrica;
 import umg.dem1.Metodos.VolumenSolido.UserVolumenSolido;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+
 public class Main {
 
 

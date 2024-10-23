@@ -2,6 +2,7 @@ package umg.dem1.Metodos.VolumenSolido;
 
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.integration.SimpsonIntegrator;
+import umg.dem1.Metodos.utilidades.GraficadorCascarones;
 
 import java.util.Scanner;
 
@@ -17,7 +18,7 @@ public class Cascarones {
                 "2. Si el eje de rotación es el Y.\n");
         String respuestaEje=sc.nextLine();
 
-        if(respuestaEje.equals("1")){ //EJE x
+        if(respuestaEje.equals("2")){ //EJE x
             eje = 'x';
             variable = 'y';
             System.out.println("\nIngresa la función en términos de y (ejemplo: y*y para f(y) = y^2): ");
@@ -33,10 +34,9 @@ public class Cascarones {
             double volumen = calcularVolumen(funcion, limInferior, limSuperior, variable);
             double volumenRedondeado = Math.round(volumen * 1000.0) / 1000.0;
 
-            System.out.println("\n\nEl volumen del sólido es: "+volumenRedondeado+" unidades cubicas.");
 
             sc.close();
-        }else if(respuestaEje.equals("2")){ //EJE Y
+        }else if(respuestaEje.equals("1")){ //EJE Y
             eje = 'y';
             variable = 'x';
             System.out.println("\nIngresa la función en términos de x (ejemplo: x*x para f(x) = x^2): ");
@@ -53,6 +53,9 @@ public class Cascarones {
             double volumenRedondeado = Math.round(volumen * 1000.0) / 1000.0;
 
             System.out.println("\n\nEl volumen del sólido es: "+volumenRedondeado+" unidades cubicas.");
+
+            GraficadorCascarones graficador = new GraficadorCascarones(inputFuncion, limInferior, limSuperior, eje, variable);
+            graficador.mostrarGrafica();
 
             sc.close();
         }else{
@@ -91,7 +94,7 @@ public class Cascarones {
     }
 
 
-    private double evalSimpleExpression(String expresion, char variable) {
+    public double evalSimpleExpression(String expresion, char variable) {
         try {
             return new Object() {
                 int pos = -1, ch;
@@ -160,6 +163,7 @@ public class Cascarones {
                     } else {
                         throw new RuntimeException("Unexpected: " + (char) ch);
                     }
+
                     if (eat('^')) {
                         x = Math.pow(x, parseFactor());}
 

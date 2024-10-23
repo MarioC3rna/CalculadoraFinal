@@ -4,6 +4,7 @@ import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 import org.apache.commons.math3.analysis.UnivariateFunction;
 import org.apache.commons.math3.analysis.integration.SimpsonIntegrator;
+import umg.dem1.Metodos.utilidades.GraficadorFunciones;
 
 import java.util.Scanner;
 
@@ -57,6 +58,10 @@ public class LogicaCentroides {
 
                 System.out.printf("Área (A): %.2f%n", area);
                 System.out.printf("Centro de masa (x̄, ȳ): (%.2f, %.2f)%n", xBar, yBar);
+
+                //mandar a llamar a la graficadorfunciones
+                GraficadorFunciones.mostrarGrafica(funcionInput, funcion, a, b);
+
             } else {
                 System.out.println("El área es 0 o no se pudo calcular correctamente.");
             }

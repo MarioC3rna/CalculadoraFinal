@@ -14,9 +14,10 @@ import org.matheclipse.core.interfaces.IExpr;
 import javax.swing.*;
 import java.awt.*;
 
+import static umg.dem1.Metodos.utilidades.GraficadorFunciones.mostrarGrafica;
 public class LogicaAreaBajoCurva {
 
-    public void calcularAreaBajoLaCurva(String funcion, double limiteInferior, double limiteSuperior, String variable) {
+    public String calcularAreaBajoLaCurva(String funcion, double limiteInferior, double limiteSuperior, String variable) {
         UnivariateFunction function = v -> {
             ExprEvaluator util = new ExprEvaluator();
             IExpr expr = util.evaluate(funcion.replace(variable, "(" + v + ")"));
@@ -24,52 +25,18 @@ public class LogicaAreaBajoCurva {
         };
 
         SimpsonIntegrator integrator = new SimpsonIntegrator();
+        String resultado;
 
         try {
-            double resultado = integrator.integrate(1000, function, limiteInferior, limiteSuperior);
-            System.out.println("El área bajo la curva desde " + limiteInferior + " hasta " + limiteSuperior + " es: " + resultado);
+            double area = integrator.integrate(1000, function, limiteInferior, limiteSuperior);
+            resultado = "El área bajo la curva desde " + limiteInferior + " hasta " + limiteSuperior + " es: " + area;
         } catch (Exception e) {
-            System.out.println("Error al calcular el área bajo la curva.");
+            resultado = "Error al calcular el área bajo la curva.";
         }
+        mostrarGrafica(funcion, function, limiteInferior, limiteSuperior);
+        return resultado;
+
+
     }
 
-    public void graficarFuncion(String funcion, double limiteInferior, double limiteSuperior, String variable) {
-        SwingUtilities.invokeLater(() -> {
-            XYSeries series = new XYSeries("f(" + variable + ")");
-
-            ExprEvaluator util = new ExprEvaluator();
-
-            for (double v = limiteInferior; v <= limiteSuperior; v += 0.1) {
-                try {
-                    IExpr expr = util.evaluate(funcion.replace(variable, "(" + v + ")"));
-                    series.add(v, expr.evalDouble());
-                } catch (Exception e) {
-                    System.out.println("Error al evaluar la función.");
-                    return;
-                }
-            }
-
-            XYSeriesCollection dataset = new XYSeriesCollection();
-            dataset.addSeries(series);
-
-            JFreeChart chart = ChartFactory.createXYLineChart(
-                    "Gráfica de la función",
-                    variable.toUpperCase(),
-                    "f(" + variable + ")",
-                    dataset,
-                    PlotOrientation.VERTICAL,
-                    true,
-                    true,
-                    false
-            );
-
-            JFrame frame = new JFrame("Gráfica");
-            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-            frame.setLayout(new BorderLayout());
-            ChartPanel chartPanel = new ChartPanel(chart);
-            frame.add(chartPanel, BorderLayout.CENTER);
-            frame.pack();
-            frame.setVisible(true);
-        });
-    }
 }
