@@ -1,54 +1,72 @@
 package umg.dem1.Metodos.Impropias;
 
+import umg.dem1.Metodos.Definidas.LogicaDefinidas;
+
 import java.util.Scanner;
-import java.util.function.Function;
+import java.util.function.BiFunction;
+
+import java.util.Scanner;
+import java.util.function.BiFunction;
 
 public class UserImpropias {
-
+    Scanner scanner = new Scanner(System.in);
 
     public UserImpropias() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Ingresa la función para integrar (usa 'x' como variable, por ejemplo: exp(-x) para la función exponencial): ");
-        String expresion = scanner.nextLine();
-
-        Function<Double, Double> funcion = LogicaImpropias.obtenerFuncion(expresion);
-
         try {
-            System.out.print("Ingresa el valor de a (límite inferior): ");
-            double a = scanner.nextDouble();
+            LogicaImpropias   logica = new LogicaImpropias();
 
-            System.out.print("Ingresa el valor de b (límite superior, usa 'infinito' para infinito positivo): ");
-            String bInput = scanner.next();
-            double b;
-            if (bInput.equalsIgnoreCase("infinito")) {
-                b = Double.POSITIVE_INFINITY;
+            // Solicitar la función al usuario
+            System.out.println("Introduce la función a integrar:");
+            String funcionStr = scanner.nextLine();
+
+            // Solicitar el eje de integración
+            System.out.println("¿En qué eje deseas integrar? (x/y):");
+            String eje = scanner.nextLine().toLowerCase();  // Convertir a minúsculas para evitar errores
+
+            // Solicitar los límites de integración
+            double a, b;
+            if (eje.equals("x")) {
+                // Límites en el eje x
+                System.out.println("Introduce el límite inferior de integración en x:");
+                String aStr = scanner.nextLine();
+                a = LogicaImpropias.parseInput(aStr);  // Usar el método modificado
+
+                System.out.println("Introduce el límite superior de integración en x:");
+                String bStr = scanner.nextLine();
+                b = LogicaImpropias.parseInput(bStr);  // Usar el método modificado
+            } else if (eje.equals("y")) {
+                // Límites en el eje y
+                System.out.println("Introduce el límite inferior de integración en y:");
+                String aStr = scanner.nextLine();
+                a = LogicaImpropias.parseInput(aStr);  // Usar el método modificado
+
+                System.out.println("Introduce el límite superior de integración en y:");
+                String bStr = scanner.nextLine();
+                b = LogicaImpropias.parseInput(bStr);  // Usar el método modificado
             } else {
-                b = Double.parseDouble(bInput);
-            }
-
-            System.out.println("\nLas divisiones determinan cuántas partes se divide el intervalo de integración.");
-            System.out.println("Un número mayor de divisiones significa mayor precisión, pero más tiempo de cálculo.");
-            System.out.println("Por ejemplo, con 10 divisiones se obtendrá una aproximación rápida, pero con 1000 divisiones será más precisa.");
-            System.out.println("Ingresa el número de divisiones que deseas (n):");
-
-            int n = scanner.nextInt();
-
-            if (n <= 0) {
-                System.out.println("El número de divisiones debe ser mayor a 0.");
+                System.out.println("Error: Eje inválido. Debes ingresar 'x' o 'y'.");
                 return;
             }
 
-            double resultado = LogicaImpropias.calcularIntegralImpropia(funcion, a, b, n);
+            // Convertir la cadena de la función a una BiFunction utilizando LogicaDefinidas
+            BiFunction<Double, Double, Double> funcion = logica.convertirFuncion(funcionStr);
 
-            System.out.println("El valor de la integral es: " + resultado);
+            double resultado;
 
-        } catch (NumberFormatException e) {
-            System.out.println("Error en el formato de los números: " + e.getMessage());
+            if (eje.equals("x")) {
+                // Integrar respecto a x, y se mantiene constante
+                resultado = logica.integrar((x, y) -> funcion.apply(x, 0.0), a, b, 0, 0, "x");
+            } else {
+                // Integrar respecto a y, x se mantiene constante
+                resultado = logica.integrar((x, y) -> funcion.apply(0.0, y), 0, 0, a, b, "y");
+            }
+
+            // Redondear el resultado a 3 dígitos decimales
+            System.out.printf("Resultado de la integral: %.3f%n", resultado);
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-        } finally {
-            scanner.close();
+            e.printStackTrace();
         }
     }
 }

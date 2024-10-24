@@ -32,7 +32,7 @@ public class UserDefinidas {
             String eje = scanner.nextLine().toLowerCase();  // Convertir a minúsculas para evitar errores
 
             // Solicitar los límites de integración
-            double a, b;
+            double a, b,c,d;
             if (eje.equals("x")) {
                 // Límites en el eje x
                 System.out.println("Introduce el límite inferior de integración en x:");
